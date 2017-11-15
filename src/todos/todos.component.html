@@ -1,0 +1,22 @@
+<div class="container">
+	<a (click)="logout()" [routerLink]="['/']">Logout</a>
+	<h1>Tasks to do:</h1>
+	<div *ngFor="let todo of todos">
+		<div class="d-inline-flex">
+			<h3>
+				&bull; {{todo.text}}
+			</h3>
+			<i (click)="complete(todo)" class="fa p-2" [ngClass]="{
+			'fa-check-circle-o': todo.completed,
+			'text-success': todo.completed,
+			'fa-circle-o': !todo.completed
+			}" aria-hidden="true"></i>
+			<i (click)="delete(todo._id)" class="fa fa-trash-o p-2" aria-hidden="true"></i>
+		</div>
+	</div>
+	<form class="form-group" (submit)="post_todo($event)">
+		<label for="post_todo">Post a new todo</label>
+		<input [(ngModel)]="new_todo" class="form-control" type="text" name="post_todo">
+		<button class="btn btn-primary mt-2">Submit</button>
+	</form>
+</div>
