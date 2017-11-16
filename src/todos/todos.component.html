@@ -1,6 +1,9 @@
 <div class="container">
 	<a (click)="logout()" [routerLink]="['/']">Logout</a>
 	<h1>Tasks to do:</h1>
+	<div class="text-left">
+    	<i class="fa fa-spinner fa-pulse fa-3x fa-fw mt-5" *ngIf="loading"></i>
+    </div>
 	<div *ngFor="let todo of todos">
 		<div class="d-inline-flex">
 			<h3>

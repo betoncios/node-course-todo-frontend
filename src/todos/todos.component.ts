@@ -15,22 +15,27 @@ export class TodosComponent implements OnInit{
   todos: any;
   request_options: any;
   new_todo: string;
+  loading: boolean = false;
 
   title = 'todos';
 
   ngOnInit() { 
+  this.loading = true;
 	this.authenticate()
 		.subscribe((user) => {
   			console.log(user);
   			this.get_todos()
   				.subscribe((data) => {
   					this.todos = data.json().todos;
+            this.loading = false;
   					console.log(this.todos);
   			}, (error) => {
+          this.loading = false;
   				console.log(error);
   				this.router.navigateByUrl('/');
   			});
   		}, (error) => {
+        this.loading = false;
   			console.log(error);
   			this.router.navigateByUrl('/');
   		});

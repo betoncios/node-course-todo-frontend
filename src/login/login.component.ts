@@ -14,10 +14,12 @@ export class LoginComponent {
 
   title = 'app';
   
+  loading: boolean = false;
   email: string;
   password: string;
 
   login($e): void {
+    this.loading = true;
   	$e.preventDefault();
   	//console.log(`email: ${this.email}, password: ${this.password}`);
   	var body = {
@@ -34,11 +36,16 @@ export class LoginComponent {
 			var days = 1;
 			date.setTime(date.getTime()+(days*24*60*60*1000));
 			this.cookieService.set('token', data.headers.get("x-auth"), date);
+      this.loading = false;
 			this.router.navigateByUrl('/todos');
-		}, error => console.log(error));
+		}, error => {
+      this.loading = false;
+      console.log(error)
+    });
   }
 
   register($e) {
+    this.loading = true;
     $e.preventDefault();
     var body = {
       email: this.email,
@@ -52,7 +59,11 @@ export class LoginComponent {
         var days = 1;
         date.setTime(date.getTime()+(days*24*60*60*1000));
         this.cookieService.set('token', data.headers.get("x-auth"), date);
+        this.loading = false;
         this.router.navigateByUrl('/todos');
-      }, error => console.log(error));
+      }, error => {
+        this.loading = false;
+        console.log(error)
+      });
   }
 }
