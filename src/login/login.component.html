@@ -1,8 +1,8 @@
-<div class="container-fluid">
-  <div class="jumbotron text-center">
-    <h1 class="display-2 mb-3">TodoApp</h1>
+<div class="container-fluid" style="padding: 0">
+  <div class="jumbotron text-center"  style="height: 100vh !important; width: 100vw; margin: 0">
+    <h1 class="display-3 mb-3">TodoApp</h1>
     <div class="row justify-content-center">
-      <div class="col-6 text-left">
+      <div class="col-10 col-sm-6 text-left">
         <form (submit)="login($event)" class="form-group">
           <label for="email">Email</label>
           <input [(ngModel)]="email" class="form-control mb-2" type="email" name="email">
@@ -15,6 +15,15 @@
         </div>
         <div class="text-center">
           <i class="fa fa-spinner fa-pulse fa-3x fa-fw mt-5" *ngIf="loading"></i>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="shortPassword">
+          Please, provide a valid email and a password with at least 6 letters in length.
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="loginFail">
+          Invalid email or password, please try again.
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="userExist">
+          This user already exist, please try registering again with another email.
         </div>
       </div>
     </div>
